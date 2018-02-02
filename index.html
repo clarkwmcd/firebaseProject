@@ -40,16 +40,27 @@
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
 
-      $("#firebaseui-auth-container").on("click", writeUserData);
+      $("#firebaseui-auth-container").on("click", function() {
 
-      function writeUserData(userId, name, email, imageUrl, state) {
+        var state = $("#trainNameInput").val().trim();
+
         firebase.database().ref('users/' + userId).set({
-          username: name,
-          email: email,
-          profile_picture : imageUrl,
           state: state
         });
-      }
+
+        return false;
+      });
+
+      // $("#firebaseui-auth-container").on("click", writeUserData);
+      //
+      // function writeUserData(userId, name, email, imageUrl, state) {
+      //   firebase.database().ref('users/' + userId).set({
+      //     username: name,
+      //     email: email,
+      //     profile_picture : imageUrl,
+      //     state: state
+      //   });
+      // }
 
       // var user = firebase.auth().currentUser;
       // var name, email, photoUrl, uid, emailVerified;
@@ -68,5 +79,8 @@
          Your app may use that space for branding, controls and other customizations.-->
     <h1>Firebase Login Screen</h1>
     <div id="firebaseui-auth-container"></div>
+    <form>
+      State: <input type="text" id="state" name="state"><br>
+    </form>
   </body>
 </html>
