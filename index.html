@@ -40,6 +40,8 @@
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
 
+      $("#firebaseui-auth-container").on("click", writeUserData);
+
       function writeUserData(userId, name, email, imageUrl, state) {
         firebase.database().ref('users/' + userId).set({
           username: name,
