@@ -3,8 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Setup Page</title>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src='assets/logic.js'></script>
   </head>
   <body>
     <h1>Setup Your Account</h1>
+    <h2>Are you a food donor or a food requester?</h2>
+    <br>
+    <button id="donor">Donor</button>
+    <button id="requester">Requester</button>
+
+    <form hidden>
+      Organization Name: <input type="text" id="organization" name="organization"><br>
+      Address: <input type="text" id="organization-address" name="organization-address"><br>
+    </form>
+
+    <form hidden>
+      Restaurant: <input type="text" id="restaurant" name="restaurant"><br>
+      Pickup Address: <input type="text" id="restuarant-address" name="restuarant-address"><br>
+    </form>
   </body>
 </html>
