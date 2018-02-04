@@ -28,7 +28,7 @@ $(document).ready(function() {
     // Otherwise ignore if this is a token refresh.
     // Update the current user UID.
     currentUid = user.uid;
-    goToHome();  
+    goToHome();
    } else {
     // Sign out operation. Reset the current user UID.
     currentUid = null;
@@ -94,7 +94,7 @@ $(document).ready(function() {
   //     counter++;
   //   }
 
-  });
+  // });
 
   //END AUTHENTICATION
 
