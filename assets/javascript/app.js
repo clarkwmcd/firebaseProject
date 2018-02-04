@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 
   var currentUid = null;
-  firebase.auth().onAuthStateChanged(function(user) {
+  $("#firebaseui-auth-container").on("click", function(user) {
    // onAuthStateChanged listener triggers every time the user ID token changes.
    // This could happen when a new user signs in or signs out.
    // It could also happen when the current user ID token expires and is refreshed.
@@ -31,25 +31,24 @@ $(document).ready(function() {
     goToHome();
    } else {
     // Sign out operation. Reset the current user UID.
-    currentUid = null;
-    console.log("no user signed in");
+    var uiConfig = {
+       signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
+       signInOptions: [
+        // Specify providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
+       ],
+       // Terms of service url can be specified and will show up in the widget.
+       tosUrl: '<your-tos-url>'
+      };
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
    }
   });
 
-  var uiConfig = {
-     signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
-     signInOptions: [
-      // Specify providers you want to offer your users.
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
-     ],
-     // Terms of service url can be specified and will show up in the widget.
-     tosUrl: '<your-tos-url>'
-    };
-  // Initialize the FirebaseUI Widget using Firebase.
-  var ui = new firebaseui.auth.AuthUI(firebase.auth());
-  // The start method will wait until the DOM is loaded.
-  ui.start('#firebaseui-auth-container', uiConfig);
+
 
   // var currentUid = null;
   // var counter = 0;
