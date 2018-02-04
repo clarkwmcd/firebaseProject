@@ -37,7 +37,7 @@ $(document).ready(function() {
   });
 
   var uiConfig = {
-     signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/',
+     signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
      signInOptions: [
       // Specify providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
