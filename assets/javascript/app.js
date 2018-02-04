@@ -101,7 +101,8 @@ $(document).ready(function() {
     var name = $("#restaurant").val();
     var address = $("#restaurant-address").val();
     var database = firebase.database()
-    database.ref().push(name);
+    // database.ref().push(name);
+    goToHome();
   });
 
   //END SETUP PAGE JS
