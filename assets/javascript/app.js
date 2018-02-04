@@ -37,7 +37,7 @@ $(document).ready(function() {
 
       // FirebaseUI config.
       var uiConfig = {
-        signInSuccessUrl: 'https://joycurthblisso.github.io/GroupProject-1/setuppage.html',
+        signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -107,7 +107,7 @@ $(document).ready(function() {
   //END SETUP PAGE JS
 
   function goToHome() {
-    location.href = "https://joycurthblisso.github.io/GroupProject-1/Donate.html"
+    location.href = "https://clarkwmcd.github.io/firebaseProject/Donate.html"
   }
 
 
