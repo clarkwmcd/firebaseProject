@@ -16,48 +16,83 @@ $(document).ready(function() {
 
   //START AUTHENTICATION
 
+
+
   var currentUid = null;
-  var counter = 0;
-
   firebase.auth().onAuthStateChanged(function(user) {
-    // onAuthStateChanged listener triggers every time the user ID token changes.
-    // This could happen when a new user signs in or signs out.
-    // It could also happen when the current user ID token expires and is refreshed.
-    if(counter >= 1) {
-      goToHome();
+   // onAuthStateChanged listener triggers every time the user ID token changes.
+   // This could happen when a new user signs in or signs out.
+   // It could also happen when the current user ID token expires and is refreshed.
+   if (user && user.uid != currentUid) {
+    // Update the UI when a new user signs in.
+    // Otherwise ignore if this is a token refresh.
+    // Update the current user UID.
+    currentUid = user.uid;
+    goToHome();  
+   } else {
+    // Sign out operation. Reset the current user UID.
+    currentUid = null;
+    console.log("no user signed in");
+   }
+  });
 
-    } else if (user && user.uid != currentUid) {
-      // Update the UI when a new user signs in.
-      // Otherwise ignore if this is a token refresh.
-      // Update the current user UID.
+  var uiConfig = {
+     signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/',
+     signInOptions: [
+      // Specify providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+     ],
+     // Terms of service url can be specified and will show up in the widget.
+     tosUrl: '<your-tos-url>'
+    };
+  // Initialize the FirebaseUI Widget using Firebase.
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // The start method will wait until the DOM is loaded.
+  ui.start('#firebaseui-auth-container', uiConfig);
 
-      currentUid = user.uid;
-      counter++;
-
-    } else if (counter === 0) {
-      // Sign out operation. Reset the current user UID.
-      currentUid = null;
-      console.log("no user signed in");
-
-      // FirebaseUI config.
-      var uiConfig = {
-        signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
-        signInOptions: [
-          // Leave the lines as is for the providers you want to offer your users.
-          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-          firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        // Terms of service url.
-        tosUrl: 'https://clarkwmcd.github.io/'
-      };
-
-      // Initialize the FirebaseUI Widget using Firebase.
-      var ui = new firebaseui.auth.AuthUI(firebase.auth());
-      // The start method will wait until the DOM is loaded.
-      ui.start('#firebaseui-auth-container', uiConfig);
-      counter++;
-    }
+  // var currentUid = null;
+  // var counter = 0;
+  //
+  // firebase.auth().onAuthStateChanged(function(user) {
+  //   // onAuthStateChanged listener triggers every time the user ID token changes.
+  //   // This could happen when a new user signs in or signs out.
+  //   // It could also happen when the current user ID token expires and is refreshed.
+  //   if(counter >= 1) {
+  //     goToHome();
+  //
+  //   } else if (user && user.uid != currentUid) {
+  //     // Update the UI when a new user signs in.
+  //     // Otherwise ignore if this is a token refresh.
+  //     // Update the current user UID.
+  //
+  //     currentUid = user.uid;
+  //     counter++;
+  //
+  //   } else if (counter === 0) {
+  //     // Sign out operation. Reset the current user UID.
+  //     currentUid = null;
+  //     console.log("no user signed in");
+  //
+  //     // FirebaseUI config.
+  //     var uiConfig = {
+  //       signInSuccessUrl: 'https://clarkwmcd.github.io/firebaseProject/setuppage.html',
+  //       signInOptions: [
+  //         // Leave the lines as is for the providers you want to offer your users.
+  //         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  //         firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+  //         firebase.auth.EmailAuthProvider.PROVIDER_ID
+  //       ],
+  //       // Terms of service url.
+  //       tosUrl: 'https://clarkwmcd.github.io/'
+  //     };
+  //
+  //     // Initialize the FirebaseUI Widget using Firebase.
+  //     var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  //     // The start method will wait until the DOM is loaded.
+  //     ui.start('#firebaseui-auth-container', uiConfig);
+  //     counter++;
+  //   }
 
   });
 
